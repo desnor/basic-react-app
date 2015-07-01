@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+    <title>Alex ReactApp</title>
+  </head>
+  <body>
+    <div id="title">
+      <div class="loading" style="text-align: center">
+        <h1 style="color: #999; font-family: sans-serif; font-weight: normal; font-size: 2rem;">Alex Revell: Moustache Developer</h1>
+        <p style="color: #999; font-family: sans-serif; font-weight: normal; font-size: 1.5rem; margin: 3rem">
+          Give us a moment to load and we'll be ready to go.
+        </p>
+      </div>
+      <div id="app">
+      </div>
+    </div>
+    <script type="text/jsx">
+      var CommentBox = React.createClass({
+        render: function() {
+          return <div classname="CommentBox">
+              CommentBox ready to roll:
+              <h1>Comments</h1>
+              <CommentList data={this.props.data} />
+              <CommentForm />
+            </div>
+        }
+      })
+
+      var CommentList = React.createClass({
+        render: function() {
+          return <div classname="CommentList">
+            CommentList is too.
+              <Comment author=""></Comment>
+              <Comment author=""></Comment>
+            </div>
+        }
+      })
+
+      var CommentForm = React.createClass({
+        render: function() {
+          return <div classname="CommentForm">
+          CommentForm online.
+          </div>
+        }
+      })
+
+      var Comment = React.createClass({
+        render: function() {
+          var rawMarkup = marked(this.props.children.toString(), {sanitize: true})
+          return <div classname="Comment">
+            <h2 classname="CommentAuthor">
+              {this.props.author}
+            </h2>
+            <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+          </div>
+        }
+      })
+
+      var data = [
+        {author: "Jim Moburger", comment: "First comment on the moustache"},
+        {author: "Sally Surreptitious", comment: "Second comment on *the* moustache"}
+      ]
+
+      React.render( <CommentBox data={data} />, document.getElementById('app'))
+    </script>
+  </body>
+</html>
